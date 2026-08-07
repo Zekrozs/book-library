@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="lib.css">
+    <script src="lib.js" defer></script>
+</head>
+<main>
+    <article id="book-library">
+        <section id="controls">
+            <button role="button" data-button="open-dialog" id="add-book" aria-label="add a book">add a book</button>
+        </section>
+
+        <section id="books">            
+        </section>
+    </article>
+
+    <dialog id="dialog-box">
+        <form id="selection-form">
+            <button id="submit-book" class="btn" data-button="submit-book"></button>
+        </form>
+    </dialog>
+
+    <button class="btn" id="remove-button" data-button="remove-book">remove book</button>
+    <button class="btn" id="toggle-status" data-button="read">read</button>
+</main>
+</body>
+</html>
