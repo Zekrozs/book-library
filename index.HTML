@@ -9,22 +9,43 @@
 </head>
 <main>
     <article id="book-library">
-        <section id="controls">
-            <button role="button" data-button="open-dialog" id="add-book" aria-label="add a book">add a book</button>
+        <section id="books">
+            <div class="book">
+                <p>title:lord of the rings</p>
+                <p>author: tolkin</p>
+                <p>pages: 4699</p>
+            </div>
+            <div class="book">book</div>
+            <div class="book">book</div>
+            <div class="book">book</div>
+            <button class="btn" id="remove-book-button" data-button="remove-book">remove book</button>
+            <button class="btn" id="read-status" data-button="read">read</button>
+            <div class="book">book</div>
+            <div class="book">book</div>
+            <div class="book">book</div>
+            <div class="book">book</div>
+             <div class="book">book</div>
+              <div class="book">book</div>
         </section>
-
-        <section id="books">            
+        <section id="controls">
+            <button role="button" class="btn" data-button="open-dialog" id="add-book" aria-label="add a book">add book</button>
         </section>
     </article>
 
-    <dialog id="dialog-box">
+    <dialog id="dialog-box" open>
         <form id="selection-form">
-            <button id="submit-book" class="btn" data-button="submit-book"></button>
+            <label for="book-title">title</label>
+            <input type="text" id="book-title" name="title" autofocus>
+
+            <label for="author">author</label> 
+            <input type="text" name="author" id="author">
+            
+            <label for="pages">pages</label>
+            <input type="number" name="pages" id="pages" min="30">
+
+            <button id="submit-book" class="btn"  data-button="submit-book"> add book</button>
         </form>
     </dialog>
-
-    <button class="btn" id="remove-button" data-button="remove-book">remove book</button>
-    <button class="btn" id="toggle-status" data-button="read">read</button>
 </main>
 </body>
 </html>
