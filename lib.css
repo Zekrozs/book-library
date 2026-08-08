@@ -1,0 +1,93 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* colors */
+
+:root {
+  --light-blue: hsl(200, 44%, 57%);
+  --dark-blue: hsl(210, 60%, 20%);
+  --darker-blue: hsl(210, 60%, 10%);
+  --light-green: hsl(122.42deg 28.94% 71.35%);
+  --orange: hsl(45deg 98.33% 54.38%);
+  --mustard: hsl(45, 90%, 50%);
+}
+
+body {
+  background-color: var(--light-blue);
+}
+
+#book-library {
+  display: grid;
+  grid-template-columns: 1fr 6rem;
+}
+
+
+#book-library .book {
+  height: auto;
+  min-height: 14rem;
+  background-color: aquamarine;
+}
+
+#book-library #books {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 10rem);
+  gap: 0.5rem;
+  justify-content: center;
+  position: relative;
+}
+
+#books::after{
+  content: "";
+  position: absolute;
+  top:0;
+  bottom: 0;
+  background-color: hsl(200, 44%, 50%) ;
+  width: 1px;
+  left: 99.7%;
+}
+
+#controls{
+  justify-self: center;
+}
+
+#add-book{
+  background-color: var(--mustard);
+  color: hsl(210, 60%, 15%);
+  transition: 0.2s;
+}
+
+#add-book:hover{
+  background-color: hsl(45, 90%, 60%);;
+}
+
+/* utility classes */
+/* buttons */
+.btn {
+  text-align: center;
+  padding-block: 0.3rem;
+  padding-inline: 0.3rem;
+  border-radius: 0.2rem;
+  /* width: 100%; */
+  border: none;
+  background-color: var(--dark-blue);
+  transition: 0.1s;
+}
+
+#read-status {
+  color: var(--light-green);
+}
+
+#read-status.unread {
+  color: var(--orange);
+}
+
+.btn:hover {
+  background-color: var(--darker-blue);
+}
+
+#remove-book-button {
+  color: #ff6969;
+}
