@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="lib.css">
     <script src="lib.js" defer></script>
 </head>
+<body>
 <main>
     <article id="book-library">
         <section id="books">
@@ -28,24 +29,35 @@
               <div class="book">book</div>
         </section>
         <section id="controls">
-            <button role="button" class="btn" data-button="open-dialog" id="add-book" aria-label="add a book">add book</button>
+            <button role="button" class="btn" data-button="open-dialog" id="open-dialog" aria-label="add a book">add book</button>
         </section>
     </article>
-
-    <dialog id="dialog-box" open>
-        <form id="selection-form">
-            <label for="book-title">title</label>
-            <input type="text" id="book-title" name="title" autofocus>
-
-            <label for="author">author</label> 
-            <input type="text" name="author" id="author">
-            
-            <label for="pages">pages</label>
-            <input type="number" name="pages" id="pages" min="30">
-
-            <button id="submit-book" class="btn"  data-button="submit-book"> add book</button>
-        </form>
-    </dialog>
 </main>
+<dialog id="dialog-box">
+    <form id="selection-form">
+        <fieldset class="fields">
+            <legend>add book details</legend>
+          
+            <div class="field">
+                <label for="book-title">title</label>
+                <input type="text" id="book-title" name="title" autofocus>
+            </div>
+
+            <div class="field">
+                <label for="author">author</label> 
+                <input type="text" name="author" id="author">
+            </div>
+
+             <div class="field">
+                <label for="pages">pages</label>
+                <input type="number" name="pages" id="pages" min="30">
+            </div>
+        </fieldset> 
+        <div class="form-buttons">
+            <button id="submit-button" class="btn"  data-button="submit-book"> add book</button>
+            <button class="btn" id="cancel-button" data-button="cancel">cancel</button>
+        </div>
+    </form>
+</dialog>
 </body>
 </html>
