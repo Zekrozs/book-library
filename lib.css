@@ -8,6 +8,8 @@
 
 :root {
   --light-blue: hsl(200, 44%, 57%);
+  --lighter-blue: hsl(200deg 59.25% 67.48%);
+  --transparent-blue: hsl(207 90% 90% / 1);
   --dark-blue: hsl(210, 60%, 20%);
   --darker-blue: hsl(210, 60%, 10%);
   --light-green: hsl(188.46deg 44% 57%);
@@ -22,26 +24,36 @@ body {
   background-color: var(--light-blue);
   padding-block: 3rem;
   min-height: 100vh;
-  position: relative;
 }
 
-#dialog-box #submit-button {
+#selection-form .form-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+#dialog-box #submit-button,
+#cancel-button {
   color: var(--white);
   height: 2.5rem;
+  width: 100%;
 }
 
 #dialog-box {
-  /* position: fixed;
-  bottom: 40%;
-  left: 40%; */
   border: none;
-  background-color: var(--light-blue);
+  margin: auto;
+  background-color: var(--lighter-blue);
   padding-block: 1rem;
   padding-inline: 1rem;
   width: min(80%, 25rem);
   max-height: 80dvh;
   overflow-y: auto;
   scrollbar-width: thin;
+  border-radius: 1rem;
+  box-shadow:
+    0px 11px 15px -7px hsla(210, 60%, 10%, 0.4),
+    0px 24px 38px 3px hsla(210, 60%, 10%, 0.28),
+    0px 9px 46px 8px hsla(210, 60%, 10%, 0.24);
 }
 
 #dialog-box::backdrop {
@@ -74,11 +86,10 @@ body {
   cursor: pointer;
   border-radius: 0.2rem;
   border: none;
-  background-color: var(--lighter-green);
+  background-color: var(--transparent-blue);
   color: var(--black);
+  box-shadow: inset 0 2px 4px hsla(210, 60%, 10%, 0.12);
 }
-
-/* hsl(205deg 50% 38% / 49%) */
 
 .fields .field input:hover {
   outline: 1px solid var(--darker-blue);
@@ -104,7 +115,7 @@ body {
 
 #book-library {
   display: grid;
-  grid-template-columns: 1fr 6rem;
+  grid-template-columns: 1fr minmax(6rem, 12rem);
 }
 
 #book-library .book {
@@ -118,31 +129,23 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, 12rem);
   gap: 1rem;
-  position: relative;
-  padding-inline: 2rem;
-}
-
-#books::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  background-color: hsl(200, 44%, 50%);
-  width: 1px;
-  left: 99.7%;
+  padding-inline-start: 2rem;
 }
 
 #controls {
-  justify-self: center;
+  justify-self: end;
+  border-left: 1px solid hsl(200, 44%, 50%);
+  padding-inline: 1rem;
 }
 
-#add-book {
+#open-dialog {
   background-color: var(--mustard);
   color: hsl(210, 60%, 15%);
   transition: 0.2s;
+  font-size: 1.2rem;
 }
 
-#add-book:hover {
+#open-dialog:hover {
   background-color: hsl(45, 90%, 60%);
 }
 
@@ -152,8 +155,7 @@ body {
   text-align: center;
   padding-block: 0.3rem;
   padding-inline: 0.3rem;
-  border-radius: 0.2rem;
-  /* width: 100%; */
+  border-radius: 0.2rem;  
   border: none;
   background-color: var(--dark-blue);
   transition: 0.1s;
