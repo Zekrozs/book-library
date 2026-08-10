@@ -18,7 +18,7 @@
   --mustard: hsl(45, 90%, 50%);
   --mustard-dark: hsl(45deg 88.82% 13.25%);
   --red: hsl(0deg 70% 55%);
-  --red-100:hsl(0, 100%, 71%);
+  --red-100: hsl(0, 100%, 71%);
   --white: hsl(0, 0%, 100%);
   --white-80: hsl(0 0% 80% / 1);
   --black: hsl(0, 0%, 0%);
@@ -43,18 +43,18 @@ body {
   font-size: 1rem;
 }
 
-#dialog-box #submit-button{
+#dialog-box #submit-button {
   color: var(--white-80);
 }
 
-#dialog-box #cancel-button:hover{
-background-color: hsl(0deg 70% 50%) ;
-color: var(--white);
+#dialog-box #cancel-button:hover {
+  background-color: hsl(0deg 70% 50%);
+  color: var(--white);
 }
 
-#dialog-box #cancel-button{
+#dialog-box #cancel-button {
   background-color: var(--red);
-  color: var(--white)
+  color: var(--white);
 }
 
 #dialog-box {
@@ -93,6 +93,7 @@ color: var(--white);
 
 .fields .field label {
   align-self: flex-start;
+  font-size: 1.5rem;
 }
 
 .fields .field input {
@@ -101,7 +102,6 @@ color: var(--white);
   padding-block: 0.2rem;
   padding-inline: 0.5rem;
   width: 100%;
-  cursor: pointer;
   border-radius: 0.2rem;
   border: none;
   background-color: var(--transparent-blue);
@@ -129,6 +129,7 @@ color: var(--white);
   grid-template-columns: repeat(1, 1fr);
   width: 100%;
   gap: 2rem;
+  color: var(--dark-blue);
 }
 
 #book-library {
@@ -173,13 +174,12 @@ color: var(--white);
   text-align: center;
   padding-block: 0.3rem;
   padding-inline: 0.3rem;
-  border-radius: 0.2rem;  
+  border-radius: 0.2rem;
   border: none;
   background-color: var(--dark-blue);
   transition: 0.1s;
+  cursor: pointer;
 }
-
-
 
 #read-status {
   color: var(--light-green);
@@ -191,11 +191,10 @@ color: var(--white);
 
 #submit-button:hover,
 #remove-book-button:hover,
-#read-status:hover{
-background-color: var(--darker-blue) ;
+#read-status:hover {
+  background-color: var(--darker-blue);
 }
 
 #remove-book-button {
   color: var(--red-100);
 }
-
