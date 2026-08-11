@@ -11,19 +11,31 @@
     <main>
       <article id="book-library">
         <section id="books">
-          <div class="book">
-            <p>title:lord of the rings</p>
-            <p>author: tolkin</p>
-            <p>pages: 4699</p>
-            <p>genre</p>
+          <div class="book-container">
+            <div class="book">
+              <p>title:lord of the rings</p>
+              <p>author: tolkin</p>
+              <p>pages: 4699</p>
+              <p>genre</p>
+            </div>
+            <div class="book-controls">
+              <button
+                class="btn"
+                id="remove-book-button"
+                data-button="remove-book"
+              >
+                remove book
+              </button>
+              <button class="btn" id="read-status" data-button="read">
+                read
+              </button>
+            </div>
           </div>
           <div class="book">book</div>
+
           <div class="book">book</div>
           <div class="book">book</div>
-          <!-- <button class="btn" id="remove-book-button" data-button="remove-book">
-            remove book
-          </button>
-          <button class="btn" id="read-status" data-button="read">read</button> -->
+
           <div class="book">book</div>
           <div class="book">book</div>
           <div class="book">book</div>
@@ -47,7 +59,7 @@
     <dialog id="dialog-box">
       <form id="selection-form">
         <fieldset class="fields">
-          <legend>add book details</legend>
+          <legend>book details</legend>
 
           <div class="field">
             <label for="book-title">Title</label>
