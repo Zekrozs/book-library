@@ -233,18 +233,18 @@ body {
     1px 2px 4px -2px hsl(210deg 60% 10% / 30%);
   display: flex;
   flex-direction: column;
- justify-content: space-between;
+  justify-content: space-between;
   border-right: 4px solid hsl(40, 33%, 90%);
   border-left: 3px solid hsl(210deg 60% 12%);
   position: relative;
   transition: 0.2s ease-in-out;
 }
 
-#book-library .book-container:hover{
+#book-library .book-container:hover {
   transform: translateY(-2px);
 }
 
-#book-library .book-container .book{
+#book-library .book-container .book {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -253,10 +253,7 @@ body {
 #book-library .book-container:hover .remove-book-button {
   visibility: visible;
   opacity: 1;
-  
 }
-
-
 
 #book-library #books {
   display: grid;
@@ -299,7 +296,6 @@ body {
 
 .read {
   color: var(--light-green);
-  
 }
 
 #read.unread {
@@ -311,9 +307,11 @@ body {
 .read:hover {
   background-color: var(--darker-blue);
 }
-
-.remove-book-button {
+.remove-book-button:hover {
   color: var(--red);
+}
+.remove-book-button {
+  color: var(--white-80);
   font-weight: bolder;
   border-radius: 12px;
   position: absolute;
@@ -321,6 +319,8 @@ body {
   top: 0;
   visibility: hidden;
   opacity: 0;
-  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
-  background-color: var(--darkest-blue)
+  transition:
+    opacity 0.2s ease-in-out,
+    visibility 0.2s ease-in-out;
+  background-color: var(--darkest-blue);
 }
