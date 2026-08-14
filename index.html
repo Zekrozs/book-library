@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -10,32 +10,7 @@
   <body>
     <main id="main-page">
       <article id="book-library">
-        <section id="books">
-          <div class="book-container">
-            <div class="book">
-              <h3 class="book-title">lord of the rings</h3>
-              <p class="info">by: tolkin</p>
-              <p class="info">pages: 4699</p>
-              <p class="info">genre: fantasy</p>
-            </div>
-            <button
-              class="btn remove-book-button"
-              id="remove-book-button"
-              data-button="remove-book"
-            >
-              X
-            </button>
-            <div class="book-controls">
-              <button class="btn read" id="read" data-button="read">
-                read
-              </button>
-            </div>
-          </div>
-         
-      
-            </div>
-          </div>
-        </section>
+        <section id="books"></section>
         <section id="controls">
           <button
             role="button"
@@ -50,7 +25,7 @@
       </article>
     </main>
     <dialog id="dialog-box">
-      <form id="selection-form" >
+      <form id="selection-form">
         <fieldset class="fields">
           <legend>book details</legend>
 
@@ -88,7 +63,12 @@
           <button id="submit-button" class="btn" data-button="submit-book">
             add book
           </button>
-          <button class="btn" role="button" id="cancel-button" data-button="cancel">
+          <button
+            class="btn"
+            role="button"
+            id="cancel-button"
+            data-button="cancel"
+          >
             cancel
           </button>
         </div>
