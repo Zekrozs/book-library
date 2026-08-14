@@ -3,22 +3,85 @@
 let DOM = {
   dialogBox: document.getElementById("dialog-box"),
   form: document.getElementById("selection-form"),
-  genreField: document.getElementById("selection")
+  genreField: document.getElementById("selection"),
+  titleField: document.getElementById("book-title"),
+  authorField: document.getElementById("author"),
+  pagesField: document.getElementById("pages"),
+  bookGrid: document.getElementById('books')
 };
 
-
-function clearForm(){
+function clearForm() {
   DOM.form.reset();
-  DOM.genreField.textContent = ''
+  DOM.genreField.textContent = "";
 }
 
-function resetForm(){
-    DOM.dialogBox.close();
+function closeDialogBox() {
+  DOM.dialogBox.close();
 }
 
-function openDialog(){
+function openDialog() {
   DOM.dialogBox.showModal();
 }
+
+class book {
+  constructor(title, author, pages, genre) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.genre = genre;
+  }
+}
+
+let newBook = new book(DOM.genreField.value,
+  DOM.titleField.value,
+  DOM.authorField.value,
+  DOM.pagesField.value)
+
+function createCover() {
+  const book = document.createElement("div");
+  book.classList.add("book-container");
+
+  const bookInfo = document.createElement("div");
+  bookInfo.classList.add("book");
+
+  const coverTitle = document.createElement("h3");
+  coverTitle.classList.add("book-title");
+  coverTitle.textContent = DOM.titleField.value
+
+  const coverAuthor = document.createElement("p");
+  coverAuthor.classList.add("info");
+  coverAuthor.textContent = ` By: ${DOM.authorField.value}`
+
+  const coverPages = document.createElement("p");
+  coverAuthor.classList.add("info");
+  coverPages.textContent = `pages: ${DOM.pagesField.value}`
+
+  const coverGenre = document.createElement("p");
+  coverGenre.classList.add("info");
+  coverGenre.textContent = DOM.genreField.textContent
+
+  const readBtn = document.createElement('button')
+  readBtn.classList.add('btn','status')
+  readBtn.id = 'read'
+  readBtn.textContent = 'unread'
+
+  const cancelBtn = document.createElement('button')
+  cancelBtn.classList.add('btn','remove-book-button')
+  readBtn.id = 'remove-book-button'
+  cancelBtn.textContent = 'X'
+
+  bookInfo.append(coverTitle,
+    coverAuthor,
+    coverPages,
+    coverGenre,)
+  book.append(bookInfo,
+    cancelBtn,
+    readBtn)
+  DOM.bookGrid.appendChild(book)
+
+}
+
+
 
 
 DOM.form.addEventListener("submit", (e) => {
@@ -31,17 +94,26 @@ document.addEventListener("click", (e) => {
   const dialogBtn = target.closest('[data-button="open-dialog"]');
 
   if (dialogBtn) {
-    openDialog()
+    openDialog();
   }
 
   const closeDialog = target.closest('[data-button="cancel"]');
   if (closeDialog) {
-    clearForm()
-    resetForm()
+    clearForm();
+    closeDialogBox();
   }
 
-  const selectedGenre = target.closest('[data-genre]')
-  if(selectedGenre){
-    DOM.genreField.textContent = selectedGenre.textContent
+  const confirmBook = target.closest('[data-button="submit-book"]')
+
+  if(confirmBook){
+    createCover()
+    closeDialogBox()
+    clearForm()
   }
+
+  const selectedGenre = target.closest("[data-genre]");
+  if (selectedGenre) {
+    DOM.genreField.textContent = selectedGenre.textContent;
+  }
+  
 });
