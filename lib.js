@@ -3,15 +3,16 @@
 let DOM = {
   dialogBox: document.getElementById("dialog-box"),
   form: document.getElementById("selection-form"),
-
+  genreField: document.getElementById("selection")
 };
 
 
 function clearForm(){
-  DOM.form.reset()
+  DOM.form.reset();
+  DOM.genreField.textContent = ''
 }
 
-function cancel(){
+function resetForm(){
     DOM.dialogBox.close();
 }
 
@@ -36,6 +37,11 @@ document.addEventListener("click", (e) => {
   const closeDialog = target.closest('[data-button="cancel"]');
   if (closeDialog) {
     clearForm()
-    cancel()
+    resetForm()
+  }
+
+  const selectedGenre = target.closest('[data-genre]')
+  if(selectedGenre){
+    DOM.genreField.textContent = selectedGenre.textContent
   }
 });
