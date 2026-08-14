@@ -1,6 +1,6 @@
     'use strict'
 
-let DOM ={
+let DOM = {
     openDialog: document.getElementById('open-dialog'),
     window: document.getElementById('main-page'),
     dialogBox: document.getElementById('dialog-box')
