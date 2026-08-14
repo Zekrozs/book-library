@@ -1,28 +1,41 @@
-    'use strict'
+"use strict";
 
 let DOM = {
-    openDialog: document.getElementById('open-dialog'),
-    window: document.getElementById('main-page'),
-    dialogBox: document.getElementById('dialog-box')
+  dialogBox: document.getElementById("dialog-box"),
+  form: document.getElementById("selection-form"),
+
+};
+
+
+function clearForm(){
+  DOM.form.reset()
+}
+
+function cancel(){
+    DOM.dialogBox.close();
+}
+
+function openDialog(){
+  DOM.dialogBox.showModal();
 }
 
 
+DOM.form.addEventListener("submit", (e) => {
+  e.preventDefault();
+});
 
+document.addEventListener("click", (e) => {
+  const target = e.target;
 
+  const dialogBtn = target.closest('[data-button="open-dialog"]');
 
+  if (dialogBtn) {
+    openDialog()
+  }
 
-
-
-  
-  
-    DOM.window.addEventListener('click', e => {
-        const target = e.target
-
-        const dialogBtn = target.closest('[data-button="open-dialog"]')
-
-        if (dialogBtn){
-            DOM.dialogBox.showModal()
-        }
-        
-   
-    })
+  const closeDialog = target.closest('[data-button="cancel"]');
+  if (closeDialog) {
+    clearForm()
+    cancel()
+  }
+});
