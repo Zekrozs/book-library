@@ -13,10 +13,10 @@
         <section id="books">
           <div class="book-container">
             <div class="book">
-              <p>lord of the rings</p>
-              <p>tolkin</p>
-              <p>pages: 4699</p>
-              <p>genre: fantasy</p>
+              <h3 class="book-title">lord of the rings</h3>
+              <p class="info">by: tolkin</p>
+              <p class="info">pages: 4699</p>
+              <p class="info">genre: fantasy</p>
             </div>
             <button
               class="btn remove-book-button"
@@ -31,164 +31,8 @@
               </button>
             </div>
           </div>
-          <div class="book-container">
-            <div class="book">
-              <p>lord of the rings</p>
-              <p>tolkin</p>
-              <p>pages: 4699</p>
-              <p>genre: fantasy</p>
-            </div>
-            <button
-              class="btn remove-book-button"
-              id="remove-book-button"
-              data-button="remove-book"
-            >
-              X
-            </button>
-            <div>
-              <button class="btn read unread" id="read" data-button="read">
-                unread
-              </button>
-            </div>
-          </div>
-          <div class="book-container">
-            <div class="book">
-              <p>lord of the rings</p>
-              <p>tolkin</p>
-              <p>pages: 4699</p>
-              <p>genre: fantasy</p>
-            </div>
-            <button
-              class="btn remove-book-button"
-              id="remove-book-button"
-              data-button="remove-book"
-            >
-              X
-            </button>
-            <div>
-              <button class="btn unread read" id="read" data-button="read">
-                unread
-              </button>
-            </div>
-          </div>
-          <div class="book-container">
-            <div class="book">
-              <p>lord of the rings</p>
-              <p>tolkin</p>
-              <p>pages: 4699</p>
-              <p>genre: fantasy</p>
-            </div>
-            <button
-              class="btn remove-book-button"
-              id="remove-book-button"
-              data-button="remove-book"
-            >
-              X
-            </button>
-            <div class="book-controls">
-              <button class="btn read" id="read" data-button="read">
-                read
-              </button>
-            </div>
-          </div>
-          <div class="book-container">
-            <div class="book">
-              <p>lord of the rings</p>
-              <p>tolkin</p>
-              <p>pages: 4699</p>
-              <p>genre: fantasy</p>
-            </div>
-            <button
-              class="btn remove-book-button"
-              id="remove-book-button"
-              data-button="remove-book"
-            >
-              X
-            </button>
-            <div class="book-controls">
-              <button class="btn read" id="read" data-button="read">
-                read
-              </button>
-            </div>
-          </div>
-          <div class="book-container">
-            <div class="book">
-              <p>lord of the rings</p>
-              <p>tolkin</p>
-              <p>pages: 4699</p>
-              <p>genre: fantasy</p>
-            </div>
-            <button
-              class="btn remove-book-button"
-              id="remove-book-button"
-              data-button="remove-book"
-            >
-              X
-            </button>
-            <div class="book-controls">
-              <button class="btn read" id="read" data-button="read">
-                read
-              </button>
-            </div>
-          </div>
-          <div class="book-container">
-            <div class="book">
-              <p>lord of the rings</p>
-              <p>tolkin</p>
-              <p>pages: 4699</p>
-              <p>genre: fantasy</p>
-            </div>
-            <button
-              class="btn remove-book-button"
-              id="remove-book-button"
-              data-button="remove-book"
-            >
-              X
-            </button>
-            <div class="book-controls">
-              <button class="btn read" id="read" data-button="read">
-                read
-              </button>
-            </div>
-          </div>
-          <div class="book-container">
-            <div class="book">
-              <p>lord of the rings</p>
-              <p>tolkin</p>
-              <p>pages: 4699</p>
-              <p>genre: fantasy</p>
-            </div>
-            <button
-              class="btn remove-book-button"
-              id="remove-book-button"
-              data-button="remove-book"
-            >
-              X
-            </button>
-            <div class="book-controls">
-              <button class="btn read" id="read" data-button="read">
-                read
-              </button>
-            </div>
-          </div>
-          <div class="book-container">
-            <div class="book">
-              <p>lord of the rings</p>
-              <p>tolkin</p>
-              <p>pages: 4699</p>
-              <p>genre: fantasy</p>
-            </div>
-            <button
-              class="btn remove-book-button"
-              id="remove-book-button"
-              data-button="remove-book"
-            >
-              X
-            </button>
-            <div class="book-controls">
-              <button class="btn read" id="read" data-button="read">
-                read
-              </button>
+         
+      
             </div>
           </div>
         </section>
@@ -206,7 +50,7 @@
       </article>
     </main>
     <dialog id="dialog-box" closedby="any">
-      <form id="selection-form">
+      <form id="selection-form" >
         <fieldset class="fields">
           <legend>book details</legend>
 
@@ -229,13 +73,14 @@
           <label for="genre-select">Genre</label>
           <div class="dropdown-menue">
             <button name="genre" id="genre-select-btn">
+              <p id="selection"></p>
               <span class="dropdown-icon">▼</span>
             </button>
             <ul class="list">
-              <li>fantasy</li>
-              <li>crime</li>
-              <li>science</li>
-              <li>self help</li>
+              <li data-genre="fantasy">fantasy</li>
+              <li data-genre="crime">crime</li>
+              <li data-genre="science">science</li>
+              <li data-genre="self help">self help</li>
             </ul>
           </div>
         </div>
@@ -243,7 +88,7 @@
           <button id="submit-button" class="btn" data-button="submit-book">
             add book
           </button>
-          <button class="btn" id="cancel-button" data-button="cancel">
+          <button class="btn" role="button" id="cancel-button" data-button="cancel">
             cancel
           </button>
         </div>
