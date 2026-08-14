@@ -17,6 +17,7 @@
   --darkest-blue: hsl(210, 60%, 15%);
   --light-green: hsl(188.46deg 44% 57%);
   --lighter-green: hsl(190 50% 80% / 1);
+  --dark-green: hsl(200 44% 15% / 1);
   --orange: hsl(45deg 44% 54.38%);
   --mustard: hsl(45, 90%, 50%);
   --mustard-dark: hsl(45 60% 50% / 1);
@@ -29,7 +30,7 @@
 }
 
 body {
-  background-color: var(--light-blue);
+  background-color: var(--dark-green);
   padding-block: 3rem;
   min-height: 100vh;
 }
