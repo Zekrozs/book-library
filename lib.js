@@ -41,47 +41,63 @@ function createBook() {
     DOM.genreField.textContent,
   )
     bookCollection.push(newBook) 
-    console.log(name)
+    console.log(newBook)
     
 }
 
-function createCover() {
-  const book = document.createElement("div");
-  book.classList.add("book-container");
 
-  const bookInfo = document.createElement("div");
-  bookInfo.classList.add("book");
+class dynamicCoverElems{
+  constructor(){
+    this.bookCover = document.createElement("div");
+    this.bookInfo = document.createElement("div");
+    this.coverTitle = document.createElement("h3");
+    this.coverAuthor = document.createElement("p");
+    this.coverPages = document.createElement("p");
+    this.coverGenre = document.createElement("p");
+    this.readBtn = document.createElement("button");
+    this.deleteBtn = document.createElement("button");
+}}
 
-  const coverTitle = document.createElement("h3");
-  coverTitle.classList.add("book-title");
-  coverTitle.textContent = name.title;
 
-  const coverAuthor = document.createElement("p");
-  coverAuthor.classList.add("info");
-  coverAuthor.textContent = ` By: ${name.author}`;
+function paintCover() {
+  let newCover = new dynamicCoverElems
 
-  const coverPages = document.createElement("p");
-  coverAuthor.classList.add("info");
-  coverPages.textContent = `pages: ${name.pages}`;
+  newCover.bookCover.classList.add("book-container");
 
-  const coverGenre = document.createElement("p");
-  coverGenre.classList.add("info");
-  coverGenre.textContent = name.genre;
+  newCover.bookInfo.classList.add("book");
 
-  const readBtn = document.createElement("button");
-  readBtn.classList.add("btn", "status");
-  readBtn.id = "read";
-  readBtn.textContent = "unread";
+  newCover.coverTitle.classList.add("book-title");
 
-  const cancelBtn = document.createElement("button");
-  cancelBtn.classList.add("btn", "remove-book-button");
-  readBtn.id = "remove-book-button";
-  cancelBtn.textContent = "X";
+  newCover.coverAuthor.classList.add("info");
 
-  bookInfo.append(coverTitle, coverAuthor, coverPages, coverGenre);
-  book.append(bookInfo, cancelBtn, readBtn);
-  DOM.bookGrid.appendChild(book);
+  newCover.coverPages.classList.add("info");
+
+  newCover.coverGenre.classList.add("info");
+
+   newCover.coverTitle.textContent = DOM.titleField.value
+
+  newCover.readBtn.classList.add("btn", "status");
+  newCover.readBtn.dataset.button = "unread";
+  newCover.readBtn.textContent = "unread";
+
+
+  newCover.deleteBtn.classList.add("btn", "remove-book-button");
+  newCover.deleteBtn.dataset.button = "delete"
+  newCover.deleteBtn.textContent = "X";
+
+  newCover.bookInfo.append(newCover.coverTitle, 
+  newCover.coverAuthor, 
+  newCover.coverPages, 
+  newCover.coverGenre);
+
+  newCover.bookCover.append(newCover.bookInfo, 
+  newCover.deleteBtn, 
+  newCover.readBtn);
+
+  DOM.bookGrid.appendChild(newCover.bookCover);
 }
+
+
 
 DOM.form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -106,7 +122,7 @@ document.addEventListener("click", (e) => {
 
   if (confirmBook) {
     createBook()
-    createCover();
+    paintCover();
     closeDialogBox();
     clearForm();
   }
@@ -114,5 +130,17 @@ document.addEventListener("click", (e) => {
   const selectedGenre = target.closest("[data-genre]");
   if (selectedGenre) {
     DOM.genreField.textContent = selectedGenre.textContent;
+  }
+
+  const removeBookBtn = target.closest('[data-button = "delete"]')
+
+  if(removeBookBtn){
+    removeBookBtn.parentElement.remove()
+  }
+
+  const status = target.closest('[data-button="unread"]')
+
+  if(status){
+    status.classList.toggle('read')
   }
 });
