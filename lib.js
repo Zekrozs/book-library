@@ -10,7 +10,7 @@ let DOM = {
   bookGrid: document.getElementById("books"),
 };
 
-const bookCollection = []
+const bookCollection = [];
 
 function clearForm() {
   DOM.form.reset();
@@ -33,21 +33,19 @@ class book {
     this.genre = genre;
   }
 }
-function createBook() { 
-    const newBook = new book(
+function createBook() {
+  const newBook = new book(
     DOM.titleField.value,
     DOM.authorField.value,
     DOM.pagesField.value,
     DOM.genreField.textContent,
-  )
-    bookCollection.push(newBook) 
-    console.log(newBook)
-    
+  );
+  bookCollection.push(newBook);
+  console.log(newBook);
 }
 
-
-class dynamicCoverElems{
-  constructor(){
+class dynamicCoverElems {
+  constructor() {
     this.bookCover = document.createElement("div");
     this.bookInfo = document.createElement("div");
     this.coverTitle = document.createElement("h3");
@@ -56,48 +54,53 @@ class dynamicCoverElems{
     this.coverGenre = document.createElement("p");
     this.readBtn = document.createElement("button");
     this.deleteBtn = document.createElement("button");
-}}
+  }
 
+  style() {
+    this.bookCover.classList.add("book-container");
+    this.bookInfo.classList.add("book");
+    this.coverTitle.classList.add("book-title");
+    this.coverAuthor.classList.add("info");
+    this.coverPages.classList.add("info");
+    this.coverGenre.classList.add("info");
+    this.readBtn.classList.add("btn", "status");
+    this.readBtn.dataset.button = "unread";
+    this.deleteBtn.classList.add("btn", "remove-book-button");
+    this.deleteBtn.dataset.button = "delete";
+  }
+
+  appending() {
+    this.bookInfo.append(
+      this.coverTitle,
+      this.coverAuthor,
+      this.coverPages,
+      this.coverGenre,
+    );
+
+    this.bookCover.append(this.bookInfo, this.deleteBtn, this.readBtn);
+
+    DOM.bookGrid.appendChild(this.bookCover);
+  }
+
+  updateText(){
+    const currentBook = bookCollection.find(book => book.title === DOM.titleField.value)
+    this.coverTitle.textContent = currentBook.title
+    this.coverAuthor.textContent = ` by: ${currentBook.author}`
+    this.coverPages.textContent = `pages: ${currentBook.pages}`
+    this.coverGenre.textContent = currentBook.genre
+    this.readBtn.textContent = `Unread`
+    this.deleteBtn.textContent = `X`
+
+  }
+}
 
 function paintCover() {
   let newCover = new dynamicCoverElems
 
-  newCover.bookCover.classList.add("book-container");
-
-  newCover.bookInfo.classList.add("book");
-
-  newCover.coverTitle.classList.add("book-title");
-
-  newCover.coverAuthor.classList.add("info");
-
-  newCover.coverPages.classList.add("info");
-
-  newCover.coverGenre.classList.add("info");
-
-   newCover.coverTitle.textContent = DOM.titleField.value
-
-  newCover.readBtn.classList.add("btn", "status");
-  newCover.readBtn.dataset.button = "unread";
-  newCover.readBtn.textContent = "unread";
-
-
-  newCover.deleteBtn.classList.add("btn", "remove-book-button");
-  newCover.deleteBtn.dataset.button = "delete"
-  newCover.deleteBtn.textContent = "X";
-
-  newCover.bookInfo.append(newCover.coverTitle, 
-  newCover.coverAuthor, 
-  newCover.coverPages, 
-  newCover.coverGenre);
-
-  newCover.bookCover.append(newCover.bookInfo, 
-  newCover.deleteBtn, 
-  newCover.readBtn);
-
-  DOM.bookGrid.appendChild(newCover.bookCover);
+  newCover.style()
+  newCover.appending()
+  newCover.updateText()
 }
-
-
 
 DOM.form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -121,7 +124,7 @@ document.addEventListener("click", (e) => {
   const confirmBook = target.closest('[data-button="submit-book"]');
 
   if (confirmBook) {
-    createBook()
+    createBook();
     paintCover();
     closeDialogBox();
     clearForm();
@@ -132,15 +135,15 @@ document.addEventListener("click", (e) => {
     DOM.genreField.textContent = selectedGenre.textContent;
   }
 
-  const removeBookBtn = target.closest('[data-button = "delete"]')
+  const removeBookBtn = target.closest('[data-button = "delete"]');
 
-  if(removeBookBtn){
-    removeBookBtn.parentElement.remove()
+  if (removeBookBtn) {
+    removeBookBtn.parentElement.remove();
   }
 
-  const status = target.closest('[data-button="unread"]')
+  const status = target.closest('[data-button="unread"]');
 
-  if(status){
-    status.classList.toggle('read')
+  if (status) {
+    status.classList.toggle("read");
   }
 });
