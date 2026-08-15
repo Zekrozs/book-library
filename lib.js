@@ -48,10 +48,10 @@ class dynamicCoverElems {
   constructor() {
     this.bookCover = document.createElement("div");
     this.bookInfo = document.createElement("div");
-    this.coverTitle = document.createElement("h3");
-    this.coverAuthor = document.createElement("p");
-    this.coverPages = document.createElement("p");
-    this.coverGenre = document.createElement("p");
+    this.title = document.createElement("h3");
+    this.author = document.createElement("p");
+    this.pages = document.createElement("p");
+    this.genre = document.createElement("p");
     this.readBtn = document.createElement("button");
     this.deleteBtn = document.createElement("button");
   }
@@ -59,10 +59,10 @@ class dynamicCoverElems {
   style() {
     this.bookCover.classList.add("book-container");
     this.bookInfo.classList.add("book");
-    this.coverTitle.classList.add("book-title");
-    this.coverAuthor.classList.add("info");
-    this.coverPages.classList.add("info");
-    this.coverGenre.classList.add("info");
+    this.title.classList.add("book-title");
+    this.author.classList.add("info");
+    this.pages.classList.add("info");
+    this.genre.classList.add("info");
     this.readBtn.classList.add("btn", "status");
     this.readBtn.dataset.button = "unread";
     this.deleteBtn.classList.add("btn", "remove-book-button");
@@ -71,10 +71,10 @@ class dynamicCoverElems {
 
   appending() {
     this.bookInfo.append(
-      this.coverTitle,
-      this.coverAuthor,
-      this.coverPages,
-      this.coverGenre,
+      this.title,
+      this.author,
+      this.pages,
+      this.genre,
     );
 
     this.bookCover.append(this.bookInfo, this.deleteBtn, this.readBtn);
@@ -84,10 +84,15 @@ class dynamicCoverElems {
 
   updateText(){
     const currentBook = bookCollection.find(book => book.title === DOM.titleField.value)
-    this.coverTitle.textContent = currentBook.title
-    this.coverAuthor.textContent = ` by: ${currentBook.author}`
-    this.coverPages.textContent = `pages: ${currentBook.pages}`
-    this.coverGenre.textContent = currentBook.genre
+
+    for(let key in currentBook){
+      this[key].textContent = currentBook[key]
+    }
+
+    // this.coverTitle.textContent = currentBook.title
+    // this.coverAuthor.textContent = ` by: ${currentBook.author}`
+    // this.coverPages.textContent = `pages: ${currentBook.pages}`
+    // this.coverGenre.textContent = currentBook.genre
     this.readBtn.textContent = `Unread`
     this.deleteBtn.textContent = `X`
 
