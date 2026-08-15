@@ -41,7 +41,12 @@ function createBook() {
     DOM.genreField.textContent,
   );
   bookCollection.push(newBook);
-  console.log(newBook);
+  return newBook;
+}
+
+function handleFormSubmit() {
+  const newBookData = createBook();
+  paintCover(newBookData);
 }
 
 class dynamicCoverElems {
@@ -70,41 +75,27 @@ class dynamicCoverElems {
   }
 
   appending() {
-    this.bookInfo.append(
-      this.title,
-      this.author,
-      this.pages,
-      this.genre,
-    );
-
+    this.bookInfo.append(this.title, this.author, this.pages, this.genre);
     this.bookCover.append(this.bookInfo, this.deleteBtn, this.readBtn);
-
     DOM.bookGrid.appendChild(this.bookCover);
   }
 
-  updateText(){
-    const currentBook = bookCollection.find(book => book.title === DOM.titleField.value)
-
-    for(let key in currentBook){
-      this[key].textContent = currentBook[key]
+  updateText(freshBookData) {
+    for (let key in freshBookData) {
+      this[key].textContent = freshBookData[key];
     }
 
-    // this.coverTitle.textContent = currentBook.title
-    // this.coverAuthor.textContent = ` by: ${currentBook.author}`
-    // this.coverPages.textContent = `pages: ${currentBook.pages}`
-    // this.coverGenre.textContent = currentBook.genre
-    this.readBtn.textContent = `Unread`
-    this.deleteBtn.textContent = `X`
-
+    this.readBtn.textContent = `Unread`;
+    this.deleteBtn.textContent = `X`;
   }
 }
 
-function paintCover() {
-  let newCover = new dynamicCoverElems
+function paintCover(freshBookData) {
+  let newCover = new dynamicCoverElems();
 
-  newCover.style()
-  newCover.appending()
-  newCover.updateText()
+  newCover.style();
+  newCover.appending();
+  newCover.updateText(freshBookData);
 }
 
 DOM.form.addEventListener("submit", (e) => {
@@ -129,8 +120,7 @@ document.addEventListener("click", (e) => {
   const confirmBook = target.closest('[data-button="submit-book"]');
 
   if (confirmBook) {
-    createBook();
-    paintCover();
+    handleFormSubmit();
     closeDialogBox();
     clearForm();
   }
