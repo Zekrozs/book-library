@@ -12,6 +12,7 @@ let DOM = {
 
 const bookCollection = [];
 
+
 function clearForm() {
   DOM.form.reset();
   DOM.genreField.textContent = "";
@@ -33,19 +34,24 @@ class book {
     this.genre = genre;
   }
 }
-function createBook() {
+function createBook(title,pages,author,genre) {
   const newBook = new book(
-    DOM.titleField.value,
-    DOM.authorField.value,
-    DOM.pagesField.value,
-    DOM.genreField.textContent,
+    title,
+    pages,
+    author,
+    genre,
   );
   bookCollection.push(newBook);
   return newBook;
 }
 
 function handleFormSubmit() {
-  const newBookData = createBook();
+  const newBookData = createBook(
+    DOM.titleField.value,
+    DOM.authorField.value,
+    DOM.pagesField.value,
+    DOM.genreField.textContent
+  );
   paintCover(newBookData);
 }
 
@@ -82,7 +88,13 @@ class dynamicCoverElems {
 
   updateText(freshBookData) {
     for (let key in freshBookData) {
-      this[key].textContent = freshBookData[key];
+      if (key === "pages") {
+        this[key].textContent = `Pages: ${freshBookData[key]}`;
+      } else if (key === "author") {
+        this[key].textContent = `By: ${freshBookData[key]}`;
+      } else {
+        this[key].textContent = freshBookData[key];
+      }
     }
 
     this.readBtn.textContent = `Unread`;
