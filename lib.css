@@ -122,6 +122,8 @@ body {
   position: relative;
 }
 
+
+
 .dropdown-wrapper label {
   font-size: 1.3rem;
 }
@@ -130,9 +132,9 @@ body {
   font-size: 0.8rem;
   font-weight: 600;
   height: 1.5rem;
-  min-width: 6rem;
-  padding-block: 0.2rem;
-  padding-inline: 0.2rem;
+  width: 6rem;
+  padding-block: 0.5rem;
+  padding-inline: 0 0.2rem;
   text-align: center;
   border-radius: 0.2rem;
   border: none;
@@ -142,6 +144,17 @@ body {
   display: flex;
   flex-direction: row;
   cursor: pointer;
+align-items: center;
+
+}
+
+#genre-select-btn #selection{
+  width: 100%;
+  border: none;
+  background-color: var(--transparent-blue);
+  color: var(--black);
+  cursor: default;
+  padding-inline-start: 0.5rem;
 }
 
 #genre-select-btn span {
@@ -220,13 +233,13 @@ body {
 }
 
 #book-library .book-container {
-  height: auto;
+  height: 100%;
   min-height: 16rem;
   background-color: var(--dark-blue-90);
   color: var(--mustard-dark);
   font-size: 1.2rem;
   padding-block: 1rem;
-  padding-inline: 1rem;
+  padding-inline: 1rem 0.2rem;
   border-radius: 4px 8px 8px 4px;
   box-shadow:
     inset 2px 2px 2px hsl(210deg 60% 40% / 30%),
@@ -235,6 +248,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: flex-start;
   border-right: 4px solid hsl(40, 33%, 90%);
   border-left: 3px solid hsl(210deg 60% 12%);
   position: relative;
@@ -265,7 +279,6 @@ body {
 
 #controls {
   justify-self: end;
-  border-left: 1px solid hsl(200, 44%, 50%);
   padding-inline: 1rem;
 }
 
@@ -280,6 +293,10 @@ body {
   background-color: hsl(45, 90%, 60%);
 }
 
+#open-dialog:focus {
+  outline: none;
+}
+
 /* utility classes */
 /* buttons */
 .btn {
@@ -289,23 +306,24 @@ body {
   border-radius: 0.2rem;
   border: none;
   background-color: var(--dark-blue);
-  transition: 0.1s;
+  transition: background-color 0.1s ease-in-out;
   cursor: pointer;
   box-shadow: 0px 2px 2px -1px hsla(210, 60%, 31%, 0.3);
   border: 1px solid var(--darker-blue);
 }
 
-.read {
+.status{
+ color: var(--white-80);  
+}
+
+.status.read {
   color: var(--light-green);
 }
 
-#read.unread {
-  color: var(--white-80);
-}
 
 #submit-button:hover,
 .remove-book-button:hover,
-.read:hover {
+.status:hover {
   background-color: var(--darker-blue);
 }
 .remove-book-button:hover {
@@ -324,4 +342,20 @@ body {
     opacity 0.2s ease-in-out,
     visibility 0.2s ease-in-out;
   background-color: var(--darkest-blue);
+  padding-block: 0.1rem;
+  padding-inline: 0.2rem;
+;
+  
+}
+
+.info{
+  font-size: 1rem;
+}
+
+.book-title{
+  margin-block-end: 0.5rem;
+}
+.empty{
+  color: var(--red);
+  font-size: 0.6rem;
 }
