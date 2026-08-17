@@ -29,26 +29,29 @@
         <fieldset class="fields">
           <legend>book details</legend>
 
-          <div class="field">
+          <div class="field inputWrapper">
             <label for="book-title">Title</label>
-            <input type="text" id="book-title" name="title" autofocus>
+            <input data-input="text" type="text" id="book-title" name="title" autofocus>
+            <p class="empty hidden">this field is required</p>
           </div>
 
-          <div class="field">
+          <div class="field inputWrapper">
             <label for="author">Author</label>
-            <input type="text" name="author" id="author">
+            <input data-input="text" type="text" name="author" id="author">
+            <p class="empty hidden">this field is required</p>
           </div>
 
-          <div class="field">
+          <div class="field inputWrapper">
             <label for="pages">Number of pages</label>
-            <input type="number" name="pages" id="pages" min="30">
+            <input data-input="number" type="number" name="pages" id="pages" min="30">
+            <p class="empty hidden">this field is required</p>
           </div>
         </fieldset>
-        <div class="dropdown-wrapper">
+        <div class="dropdown-wrapper inputWrapper">
           <label for="genre-select">Genre</label>
           <div class="dropdown-menue">
             <button value="" name="genre" id="genre-select-btn">
-              <input readonly type="text" id="selection"></input>
+              <input data-input="selection" readonly type="text" id="selection"></input>
               <span class="dropdown-icon">▼</span>
             </button>
             <ul class="list">
@@ -58,6 +61,7 @@
               <li data-genre="self help">self help</li>
             </ul>
           </div>
+          <p class="empty hidden">this field is required</p>
         </div>
         <div class="form-buttons">
           <button id="submit-button" class="btn" data-button="submit-book">
