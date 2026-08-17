@@ -3,19 +3,46 @@
 let DOM = {
   dialogBox: document.getElementById("dialog-box"),
   form: document.getElementById("selection-form"),
-  genreField: document.getElementById("selection"),
+  bookGrid: document.getElementById("books"),
+};
+
+let formFields = {
   titleField: document.getElementById("book-title"),
   authorField: document.getElementById("author"),
   pagesField: document.getElementById("pages"),
-  bookGrid: document.getElementById("books"),
+  genreField: document.getElementById("selection"),
 };
 
 const bookCollection = [];
 
+function validation(fields) {
+  let isValid = true;
+  const regex = /^[\p{L}\p{N}\s\-',.:!?&]+$/u;
+  for (let key in fields) {
+    const input = fields[key];
+    let textInput = input.dataset.input;
+    const parentElement = input.closest(".inputWrapper");
+    const errorMessage = parentElement.querySelector(".empty");
+    if (input.value.trim() === "") {
+      errorMessage.classList.remove("hidden");
+      input.classList.add("empty-field-border");
+      isValid = false;
+    } else if (textInput === "text" && !regex.test(input.value.trim())) {
+      errorMessage.textContent = "please enter a valid text";
+      errorMessage.classList.remove("hidden");
+      input.classList.add("empty-field-border");
+      isValid = false;
+    } else {
+      errorMessage.classList.add("hidden");
+      input.classList.remove("empty-field-border");
+    }
+  }
+  return isValid;
+}
 
 function clearForm() {
   DOM.form.reset();
-  DOM.genreField.textContent = "";
+  formFields.genreField.textContent = "";
 }
 
 function closeDialogBox() {
@@ -34,23 +61,18 @@ class book {
     this.genre = genre;
   }
 }
-function createBook(title,pages,author,genre) {
-  const newBook = new book(
-    title,
-    pages,
-    author,
-    genre,
-  );
+function createBook(title, pages, author, genre) {
+  const newBook = new book(title, pages, author, genre);
   bookCollection.push(newBook);
   return newBook;
 }
 
 function handleFormSubmit() {
   const newBookData = createBook(
-    DOM.titleField.value,
-    DOM.authorField.value,
-    DOM.pagesField.value,
-    DOM.genreField.textContent
+    formFields.titleField.value.trim(),
+    formFields.authorField.value.trim(),
+    formFields.pagesField.value.trim(),
+    formFields.genreField.value.trim(),
   );
   paintCover(newBookData);
 }
@@ -104,7 +126,6 @@ class dynamicCoverElems {
 
 function paintCover(freshBookData) {
   let newCover = new dynamicCoverElems();
-
   newCover.style();
   newCover.appending();
   newCover.updateText(freshBookData);
@@ -132,6 +153,8 @@ document.addEventListener("click", (e) => {
   const confirmBook = target.closest('[data-button="submit-book"]');
 
   if (confirmBook) {
+    const validated = validation(formFields);
+    if (!validated) return;
     handleFormSubmit();
     closeDialogBox();
     clearForm();
@@ -139,7 +162,7 @@ document.addEventListener("click", (e) => {
 
   const selectedGenre = target.closest("[data-genre]");
   if (selectedGenre) {
-    DOM.genreField.textContent = selectedGenre.textContent;
+    formFields.genreField.value = selectedGenre.textContent;
   }
 
   const removeBookBtn = target.closest('[data-button = "delete"]');
