@@ -24,6 +24,7 @@ function validation(fields) {
     const parentElement = input.closest(".inputWrapper");
     const errorMessage = parentElement.querySelector(".empty");
     if (input.value.trim() === "") {
+      errorMessage.textContent = 'this feild is required'
       errorMessage.classList.remove("hidden");
       input.classList.add("empty-field-border");
       isValid = false;
@@ -40,9 +41,33 @@ function validation(fields) {
   return isValid;
 }
 
+function RemoveBookUi(removeBtn){
+  const bookCover =   removeBtn.closest('.book-container')
+  bookCover.remove()
+
+}
+
+function removeBookData(removeBtn){
+  const bookContainer =  removeBtn.closest('.book-container')
+  const bookTitle = bookContainer.querySelector('.book-title').textContent
+  const bookData = bookCollection.find((book) => book.title === bookTitle)
+  const dataIndex = bookCollection.indexOf(bookData)
+  bookCollection.splice(dataIndex,1)
+}
+
+function confirmDeletion(){
+  return confirm('are you sure ?')
+}
+
 function clearForm() {
   DOM.form.reset();
-  formFields.genreField.textContent = "";
+  for (let key in formFields) {
+    const input = formFields[key];
+    const parentElement = input.closest(".inputWrapper");
+    const errorMessage = parentElement.querySelector(".empty");
+    input.classList.remove("empty-field-border");
+    errorMessage.classList.add("hidden")
+  }
 }
 
 function closeDialogBox() {
@@ -61,8 +86,8 @@ class book {
     this.genre = genre;
   }
 }
-function createBook(title, pages, author, genre) {
-  const newBook = new book(title, pages, author, genre);
+function createBook(title, author, pages, genre) {
+  const newBook = new book(title, author, pages, genre);
   bookCollection.push(newBook);
   return newBook;
 }
@@ -168,12 +193,24 @@ document.addEventListener("click", (e) => {
   const removeBookBtn = target.closest('[data-button = "delete"]');
 
   if (removeBookBtn) {
-    removeBookBtn.parentElement.remove();
+    const confirmation = confirmDeletion();
+    if(!confirmation) return;
+    RemoveBookUi(removeBookBtn);
+    removeBookData(removeBookBtn)
   }
 
   const status = target.closest('[data-button="unread"]');
 
   if (status) {
     status.classList.toggle("read");
+  }
+});
+
+document.addEventListener("input", (e) => {
+  const target = e.target;
+
+  let inputField = target.closest("[data-input]");
+  if (inputField) {
+    validation(formFields);
   }
 });
