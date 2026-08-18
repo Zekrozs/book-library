@@ -24,7 +24,7 @@ function validation(fields) {
     const parentElement = input.closest(".inputWrapper");
     const errorMessage = parentElement.querySelector(".empty");
     if (input.value.trim() === "") {
-      errorMessage.textContent = 'this feild is required'
+      errorMessage.textContent = "this feild is required";
       errorMessage.classList.remove("hidden");
       input.classList.add("empty-field-border");
       isValid = false;
@@ -41,23 +41,40 @@ function validation(fields) {
   return isValid;
 }
 
-function RemoveBookUi(removeBtn){
-  const bookCover =   removeBtn.closest('.book-container')
-  bookCover.remove()
-
+function RemoveBookUi(removeBtn) {
+  const bookCover = removeBtn.closest(".book-container");
+  bookCover.remove();
 }
 
-function removeBookData(removeBtn){
-  const bookContainer =  removeBtn.closest('.book-container')
-  const bookTitle = bookContainer.querySelector('.book-title').textContent
-  const bookData = bookCollection.find((book) => book.title === bookTitle)
-  const dataIndex = bookCollection.indexOf(bookData)
-  bookCollection.splice(dataIndex,1)
+function removeBookData(removeBtn) {
+  const bookContainer = removeBtn.closest(".book-container");
+  const bookTitle = bookContainer.querySelector(".book-title").textContent;
+  const bookData = bookCollection.find((book) => book.title === bookTitle);
+  const dataIndex = bookCollection.indexOf(bookData);
+  bookCollection.splice(dataIndex, 1);
 }
 
-function confirmDeletion(){
-  return confirm('are you sure ?')
+function confirmDeletion() {
+  return confirm("are you sure ?");
 }
+
+function bookState(statusBtn) {
+  if(statusBtn.dataset.status === 'unread'){
+    statusBtn.dataset.status = 'read'
+  } else if(statusBtn.dataset.status === 'read'){
+      statusBtn.dataset.status = 'unread'
+  }
+}
+
+function toggleStateUi(statusBtn){
+  let state = statusBtn.dataset.status
+  if(state === 'unread'){
+  statusBtn.classList.remove('read')
+  statusBtn.textContent = 'unread'
+} else  if(state === 'read'){
+  statusBtn.classList.add('read')
+  statusBtn.textContent = 'read'
+}}
 
 function clearForm() {
   DOM.form.reset();
@@ -66,7 +83,7 @@ function clearForm() {
     const parentElement = input.closest(".inputWrapper");
     const errorMessage = parentElement.querySelector(".empty");
     input.classList.remove("empty-field-border");
-    errorMessage.classList.add("hidden")
+    errorMessage.classList.add("hidden");
   }
 }
 
@@ -122,7 +139,7 @@ class dynamicCoverElems {
     this.pages.classList.add("info");
     this.genre.classList.add("info");
     this.readBtn.classList.add("btn", "status");
-    this.readBtn.dataset.button = "unread";
+    this.readBtn.dataset.status = "unread";
     this.deleteBtn.classList.add("btn", "remove-book-button");
     this.deleteBtn.dataset.button = "delete";
   }
@@ -194,15 +211,16 @@ document.addEventListener("click", (e) => {
 
   if (removeBookBtn) {
     const confirmation = confirmDeletion();
-    if(!confirmation) return;
+    if (!confirmation) return;
     RemoveBookUi(removeBookBtn);
-    removeBookData(removeBookBtn)
+    removeBookData(removeBookBtn);
   }
 
-  const status = target.closest('[data-button="unread"]');
+  const status = target.closest('[data-status]');
 
   if (status) {
-    status.classList.toggle("read");
+    bookState(status);
+    toggleStateUi(status)
   }
 });
 
@@ -213,4 +231,4 @@ document.addEventListener("input", (e) => {
   if (inputField) {
     validation(formFields);
   }
-});
+})
