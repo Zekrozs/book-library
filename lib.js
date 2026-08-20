@@ -48,7 +48,7 @@ function RemoveBookUi(removeBtn) {
 
 function removeBookData(removeBtn) {
   const bookContainer = removeBtn.closest(".book-container");
-  const bookId = bookContainer.id
+  const bookId = bookContainer.id;
   const bookData = bookCollection.find((book) => book.id === bookId);
   const dataIndex = bookCollection.indexOf(bookData);
   bookCollection.splice(dataIndex, 1);
@@ -59,22 +59,31 @@ function confirmDeletion() {
 }
 
 function bookState(statusBtn) {
-  if(statusBtn.dataset.status === 'unread'){
-    statusBtn.dataset.status = 'read'
-  } else if(statusBtn.dataset.status === 'read'){
-      statusBtn.dataset.status = 'unread'
+  if (statusBtn.dataset.status === "unread") {
+    statusBtn.dataset.status = "read";
+  } else if (statusBtn.dataset.status === "read") {
+    statusBtn.dataset.status = "unread";
   }
 }
 
-function toggleStateUi(statusBtn){
-  let state = statusBtn.dataset.status
-  if(state === 'unread'){
-  statusBtn.classList.remove('read')
-  statusBtn.textContent = 'unread'
-} else  if(state === 'read'){
-  statusBtn.classList.add('read')
-  statusBtn.textContent = 'read'
-}}
+function readStatus(statusBtn) {
+  const bookState = statusBtn.dataset.status
+  const bookContainer = statusBtn.closest(".book-container");
+  const bookId = bookContainer.id;
+  const book = bookCollection.find(data => data.id === bookId)
+  book.read = bookState
+}
+
+function toggleStateUi(statusBtn) {
+  let state = statusBtn.dataset.status;
+  if (state === "unread") {
+    statusBtn.classList.remove("read");
+    statusBtn.textContent = "unread";
+  } else if (state === "read") {
+    statusBtn.classList.add("read");
+    statusBtn.textContent = "read";
+  }
+}
 
 function clearForm() {
   DOM.form.reset();
@@ -96,16 +105,17 @@ function openDialog() {
 }
 
 class book {
-  constructor(title, author, pages, genre,id) {
+  constructor(title, author, pages, genre, id) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.genre = genre;
-    this.id = id
+    this.id = id;
+    this.read = 'unread'
   }
 }
-function createBook(title, author, pages, genre, id) {
-  const newBook = new book(title, author, pages, genre,id);
+function createBook(title, author, pages, genre, id, read) {
+  const newBook = new book(title, author, pages, genre, id, read);
   bookCollection.push(newBook);
   return newBook;
 }
@@ -116,7 +126,7 @@ function handleFormSubmit() {
     formFields.authorField.value.trim(),
     formFields.pagesField.value.trim(),
     formFields.genreField.value.trim(),
-    crypto.randomUUID()
+    crypto.randomUUID(),
   );
   paintCover(newBookData);
 }
@@ -135,7 +145,7 @@ class dynamicCoverElems {
 
   style(freshBookData) {
     this.bookCover.classList.add("book-container");
-    this.bookCover.id = freshBookData.id
+    this.bookCover.id = freshBookData.id;
     this.bookInfo.classList.add("book");
     this.title.classList.add("book-title");
     this.author.classList.add("info");
@@ -155,7 +165,7 @@ class dynamicCoverElems {
 
   updateText(freshBookData) {
     for (let key in freshBookData) {
-      if(key === 'id'){
+      if (key === "id" || key === 'read') {
         continue;
       }
       if (key === "pages") {
@@ -222,11 +232,12 @@ document.addEventListener("click", (e) => {
     removeBookData(removeBookBtn);
   }
 
-  const status = target.closest('[data-status]');
+  const status = target.closest("[data-status]");
 
   if (status) {
     bookState(status);
-    toggleStateUi(status)
+    readStatus(status)
+    toggleStateUi(status);
   }
 });
 
@@ -237,4 +248,4 @@ document.addEventListener("input", (e) => {
   if (inputField) {
     validation(formFields);
   }
-})
+});
