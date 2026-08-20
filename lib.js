@@ -48,8 +48,8 @@ function RemoveBookUi(removeBtn) {
 
 function removeBookData(removeBtn) {
   const bookContainer = removeBtn.closest(".book-container");
-  const bookTitle = bookContainer.querySelector(".book-title").textContent;
-  const bookData = bookCollection.find((book) => book.title === bookTitle);
+  const bookId = bookContainer.id
+  const bookData = bookCollection.find((book) => book.id === bookId);
   const dataIndex = bookCollection.indexOf(bookData);
   bookCollection.splice(dataIndex, 1);
 }
@@ -96,15 +96,16 @@ function openDialog() {
 }
 
 class book {
-  constructor(title, author, pages, genre) {
+  constructor(title, author, pages, genre,id) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.genre = genre;
+    this.id = id
   }
 }
-function createBook(title, author, pages, genre) {
-  const newBook = new book(title, author, pages, genre);
+function createBook(title, author, pages, genre, id) {
+  const newBook = new book(title, author, pages, genre,id);
   bookCollection.push(newBook);
   return newBook;
 }
@@ -115,6 +116,7 @@ function handleFormSubmit() {
     formFields.authorField.value.trim(),
     formFields.pagesField.value.trim(),
     formFields.genreField.value.trim(),
+    crypto.randomUUID()
   );
   paintCover(newBookData);
 }
@@ -131,8 +133,9 @@ class dynamicCoverElems {
     this.deleteBtn = document.createElement("button");
   }
 
-  style() {
+  style(freshBookData) {
     this.bookCover.classList.add("book-container");
+    this.bookCover.id = freshBookData.id
     this.bookInfo.classList.add("book");
     this.title.classList.add("book-title");
     this.author.classList.add("info");
@@ -152,6 +155,9 @@ class dynamicCoverElems {
 
   updateText(freshBookData) {
     for (let key in freshBookData) {
+      if(key === 'id'){
+        continue;
+      }
       if (key === "pages") {
         this[key].textContent = `Pages: ${freshBookData[key]}`;
       } else if (key === "author") {
@@ -168,7 +174,7 @@ class dynamicCoverElems {
 
 function paintCover(freshBookData) {
   let newCover = new dynamicCoverElems();
-  newCover.style();
+  newCover.style(freshBookData);
   newCover.appending();
   newCover.updateText(freshBookData);
 }
